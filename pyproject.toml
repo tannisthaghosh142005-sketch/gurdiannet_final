@@ -6,8 +6,6 @@ build-backend = "setuptools.build_meta"
 name = "guardiannet"
 version = "1.0.0"
 description = "OpenEnv RL environment for content moderation"
-authors = [{ name = "Your Name", email = "you@example.com" }]
-readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "gymnasium>=0.29.1",
@@ -15,7 +13,6 @@ dependencies = [
     "pydantic>=2.0.0",
     "openai>=1.0.0",
     "python-dotenv>=1.0.0",
-    "openenv-core>=0.2.0",
 ]
 
 [project.scripts]
