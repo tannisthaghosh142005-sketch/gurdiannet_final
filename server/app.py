@@ -8,7 +8,7 @@ class Handler(BaseHTTPRequestHandler):
         path = parsed.path
         query = parse_qs(parsed.query)
 
-        if path == "/reset":
+        if path.endswith("/reset"):   # ✅ FIXED
             self._send_ok()
         elif path == "/" and query.get("logs") == ["container"]:
             self._send_logs_ok()
@@ -19,7 +19,7 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_POST(self):
-        if self.path == "/reset":
+        if self.path.endswith("/reset"):   # ✅ FIXED
             self._send_ok()
         else:
             self.send_response(404)
