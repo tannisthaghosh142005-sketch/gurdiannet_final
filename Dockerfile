@@ -1,6 +1,13 @@
 FROM python:3.11-slim
+
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
+
+# Install uv
+RUN pip install uv
+
+# Install dependencies using uv.lock
+RUN uv sync
+
 CMD ["sh", "-c", "python inference.py && python server/app.py"]
