@@ -8,31 +8,40 @@ class Handler(BaseHTTPRequestHandler):
         path = parsed.path
         query = parse_qs(parsed.query)
 
-        # Handle /reset endpoint (required for hackathon)
         if path == "/reset":
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps({"status": "ok"}).encode())
-        
-        # Handle /?logs=container (internal HF health check)
+            self._send_ok()
         elif path == "/" and query.get("logs") == ["container"]:
-            self.send_response(200)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"Logs endpoint OK")
-        
-        # Handle root path (optional – shows a simple page)
+            self._send_logs_ok()
         elif path == "/":
-            self.send_response(200)
-            self.send_header("Content-type", "text/html")
-            self.end_headers()
-            self.wfile.write(b"<h1>GuardianNet is running</h1><p>Ready for evaluation.</p>")
-        
-        # All other paths return 404
+            self._send_html()
         else:
             self.send_response(404)
             self.end_headers()
+
+    def do_POST(self):
+        if self.path == "/reset":
+            self._send_ok()
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def _send_ok(self):
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps({"status": "ok"}).encode())
+
+    def _send_logs_ok(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/plain")
+        self.end_headers()
+        self.wfile.write(b"Logs endpoint OK")
+
+    def _send_html(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(b"<h1>GuardianNet is running</h1><p>Ready for evaluation.</p>")
 
 def main():
     port = 7860
