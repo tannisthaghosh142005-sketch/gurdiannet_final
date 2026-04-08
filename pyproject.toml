@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "guardiannet"
+version = "1.0.0"
+description = "OpenEnv RL environment for content moderation"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "gymnasium>=0.29.1",
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0",
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "openenv-core>=0.2.0",
+]
+
+[project.scripts]
+guardiannet-server = "server:main"   # points to a main() function in server.py
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cae_env*", "tasks*"]
