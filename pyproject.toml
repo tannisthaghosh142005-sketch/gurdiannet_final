@@ -19,8 +19,8 @@ dependencies = [
 ]
 
 [project.scripts]
-guardiannet-server = "server:main"   # points to a main() function in server.py
+guardiannet-server = "server.app:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["cae_env*", "tasks*"]
+include = ["cae_env*", "tasks*", "server*"]
