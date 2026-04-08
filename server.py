@@ -12,8 +12,11 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(404)
             self.end_headers()
 
-if __name__ == "__main__":
+def main():
     port = 7860
     server = HTTPServer(("0.0.0.0", port), Handler)
     print(f"Serving on port {port}")
     server.serve_forever()
+
+if __name__ == "__main__":
+    main()
