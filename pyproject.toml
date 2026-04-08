@@ -14,10 +14,3 @@ dependencies = [
     "openai>=1.0.0",
     "python-dotenv>=1.0.0",
 ]
-
-[project.scripts]
-guardiannet-server = "server.app:main"
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["cae_env*", "tasks*", "server*"]
